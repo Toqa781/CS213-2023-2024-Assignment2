@@ -3,7 +3,7 @@ using namespace std;
 
 int main()
 {
-    string s[200];
+    char s[200];
     int i=0, j;
     bool flag = false;
     gets(s);
