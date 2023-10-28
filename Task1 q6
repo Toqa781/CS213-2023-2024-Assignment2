@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void binaryPrint(int n) {
+    if (n > 1) {
+        binaryPrint(n / 2);
+    }
+   cout << n % 2;
+}
+
+int main() {
+   cout << "output:";
+    binaryPrint(27);
+
+
+    return 0;
+}
