@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<string>split(string target,char delimiter){
+vector<string>split(string target,string delimiter){
     vector<string>result;
     string token;
     for(int i=0;i<target.length();i++){
-        if(target[i] !=delimiter){
+        if(target[i] !=delimiter[0]){
             token+=target[i];
         }
         else{
@@ -22,7 +22,12 @@ vector<string>split(string target,char delimiter){
 }
 
 int main() {
-    vector<string> substrings = split("10,20,30",',');
+    string target,delimiter;
+    cout<<"Enter the target: ";
+    cin>>target;
+    cout<<"Enter the delimiter: ";
+    cin>>delimiter;
+    vector<string> substrings = split(target,delimiter);
 
     for (int i=0;i<substrings.size();i++) {
         cout << substrings[i] <<endl;
