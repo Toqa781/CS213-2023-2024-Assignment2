@@ -52,10 +52,10 @@ int main() {
     while (getline(inputFile, line)) {
         int lineTotalPoints = 0;  // Total points for this line
 
-        for (auto& entry : phishingKeywords) {
-            string keyword = entry.first;
-            int pointVal = entry.second;
-            size_t found = line.find(keyword);
+        for (auto& map : phishingKeywords) {
+            string keyword = map.first;
+            int pointVal = map.second;
+            int found = line.find(keyword);
             while (found != -1) {
                 lineTotalPoints += pointVal;
                 found = line.find(keyword, found + 1);
@@ -65,10 +65,10 @@ int main() {
         for (auto& entry : phishingKeywords) {
             string keyword = entry.first;
             int pointVal = entry.second;
-            size_t keywordCount = 0;
-            size_t pos = 0;
+            int keywordCount = 0;
+            int pos = 0;
 
-            while ((pos = line.find(keyword, pos)) != string::npos) {
+            while ((pos = line.find(keyword, pos)) !=-1) {
                 ++keywordCount;
                 pos += keyword.length();
             }
