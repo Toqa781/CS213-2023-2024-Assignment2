@@ -62,9 +62,9 @@ int main() {
             }
         }
 
-        for (auto& entry : phishingKeywords) {
-            string keyword = entry.first;
-            int pointVal = entry.second;
+        for (auto& map : phishingKeywords) {
+            string keyword = map.first;
+            int pointVal = map.second;
             int keywordCount = 0;
             int pos = 0;
 
