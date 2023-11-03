@@ -99,6 +99,16 @@ ostream& operator<<(ostream& out,BigReal& num){
     out<<num.value;
     return out;
 }
+BigReal BigReal:: operator+( BigReal& other) {
+    BigReal r(stod(this->value) + stod(other.value));
+
+    return r;
+}
+BigReal BigReal:: operator-( BigReal& other) {
+    BigReal r(stod(this->value) - stod(other.value));
+
+    return r;
+}
 int main(){
     BigReal r1("+3.3.3");
     BigReal r2("-22");
