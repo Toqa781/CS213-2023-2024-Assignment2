@@ -1,4 +1,13 @@
-//Q5
+// File: A2_S8_20220453_Q5.cpp
+// Purpose: program that manages a list of up to 10 players and their high scores 
+//          allows the user to add players to the list, print the list, search for a player
+//          in the list
+// Author: Farah Mohamed Magdy Mohamed
+// Section: 8
+// ID: 20220453
+// TA: Khalid Ibrahim
+// Date: 4 Nov 2023
+
 struct Player {
     string name;
     int score;
