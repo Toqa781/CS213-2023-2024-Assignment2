@@ -5,6 +5,7 @@
 // ID: 20220453
 // TA: Khalid Ibrahim
 // Date: 4 Nov 2023
+
 bool isPunctuation(char c) {
     return c == '.' || c == ',' || c == '?' || c == '!' || c == ';' || c == ':' || c == '-';
 }
