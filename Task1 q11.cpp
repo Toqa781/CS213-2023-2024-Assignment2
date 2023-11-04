@@ -1,3 +1,12 @@
+// File: A2_S8_20220453_Q11.cpp
+// Purpose: a file comparison facility that asks the user for the names of two files to compare
+//          by character or by word
+// Author: Farah Mohamed Magdy Mohamed
+// Section: 8
+// ID: 20220453
+// TA: Khalid Ibrahim
+// Date: 4 Nov 2023
+
 void compare_byChar(string file1, string file2) {
     ifstream f1(file1);
     ifstream f2(file2);
