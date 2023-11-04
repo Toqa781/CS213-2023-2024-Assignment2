@@ -109,6 +109,17 @@ BigReal BigReal:: operator-( BigReal& other) {
 
     return r;
 }
+
+bool BigReal::operator> (BigReal& other) {
+
+    return stod(this->value) > stod(other.value);
+}
+
+bool BigReal::operator< (BigReal& other) {
+
+    return stod(this->value) < stod(other.value);
+}
+
 int main(){
     BigReal r1("+3.3.3");
     BigReal r2("-22");
