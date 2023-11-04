@@ -1,4 +1,10 @@
-//Q2
+// File: A2_S8_20220453_Q2.cpp
+// Purpose: program that converts male speech to inclusive speech that includes both male and female
+// Author: Farah Mohamed Magdy Mohamed
+// Section: 8
+// ID: 20220453
+// TA: Khalid Ibrahim
+// Date: 4 Nov 2023
 bool isPunctuation(char c) {
     return c == '.' || c == ',' || c == '?' || c == '!' || c == ';' || c == ':' || c == '-';
 }
