@@ -1,3 +1,11 @@
+// File:BigReal.h.cpp
+// Purpose:A header for a class BigReal
+// Author:Toqa Abdalla Ahmed, Mai Hassan Awad, Farah
+// Section:s7,8
+// ID:20220093,20221172,20220453
+// TA:Khaled Ibrahim
+// Date: 5 Nov 2023
+
 #ifndef BIGREAL_H
 #define BIGREAL_H
 #include <bits/stdc++.h>
