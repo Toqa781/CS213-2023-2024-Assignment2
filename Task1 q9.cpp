@@ -1,3 +1,10 @@
+// File:Task1 question 9.cpp
+// Purpose:find if i can win the game with 42 bears with numbers of bears given to me 
+// Author:Toqa Abdalla Ahmed
+// Section:s7,8
+// ID:20220093
+// TA:Khaled Ibrahim
+// Date: 5 Nov 2023
 #include <bits/stdc++.h>
 using namespace std;
 bool bears(int n){
