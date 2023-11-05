@@ -1,3 +1,10 @@
+// File:BigReal.h.cpp
+// Purpose:The implementation of class BigReal
+// Author:Toqa Abdalla Ahmed, Mai Hassan Awad, Farah
+// Section:s7,8
+// ID:20220093,20221172,20220453
+// TA:Khaled Ibrahim
+// Date: 5 Nov 2023
 #include <bits/stdc++.h>
 #include "BigReal.h"
 using namespace std;
