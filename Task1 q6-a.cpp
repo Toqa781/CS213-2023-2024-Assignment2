@@ -1,4 +1,10 @@
-//a)
+// File:Task1 question 6)a).cpp
+// Purpose: print the Binary number for a decimal number
+// Author:Toqa Abdalla Ahmed
+// Section:s7,8
+// ID:20220093
+// TA:Khaled Ibrahim
+// Date: 5 Nov 2023
 #include <bits/stdc++.h>
 using namespace std;
 
