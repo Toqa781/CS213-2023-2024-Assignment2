@@ -1,3 +1,10 @@
+// File:Task1 question 12.cpp
+// Purpose: recive an email and count the phishing words in it 
+// Author:Toqa Abdalla Ahmed
+// Section:s7,8
+// ID:20220093
+// TA:Khaled Ibrahim
+// Date: 5 Nov 2023
 #include <bits/stdc++.h>
 using namespace std;
 
