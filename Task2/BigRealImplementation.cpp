@@ -1,6 +1,6 @@
 // File:BigReal.h.cpp
 // Purpose:The implementation of class BigReal
-// Author:Toqa Abdalla Ahmed, Mai Hassan Awad, Farah
+// Author:Toqa Abdalla Ahmed, Mai Hassan Awad, Farah Mohamed Magdy
 // Section:s7,8
 // ID:20220093,20221172,20220453
 // TA:Khaled Ibrahim
