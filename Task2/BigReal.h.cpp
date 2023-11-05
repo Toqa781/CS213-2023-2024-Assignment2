@@ -1,6 +1,6 @@
 // File:BigReal.h.cpp
 // Purpose:A header for a class BigReal
-// Author:Toqa Abdalla Ahmed, Mai Hassan Awad, Farah
+// Author:Toqa Abdalla Ahmed, Mai Hassan Awad, Farah Mohamed Magdy
 // Section:s7,8
 // ID:20220093,20221172,20220453
 // TA:Khaled Ibrahim
