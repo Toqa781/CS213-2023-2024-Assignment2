@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Machine{
+    vector<int> instructions;
+public :
+    void menu(){
+    cout<<"1.Load Program.\n"
+          "2.Display the PC.\n"
+          "3.Display the IR.\n"
+          "4.Display the registers.\n"
+          "5.Display the memory.\n"
+          "6.Display the screen.\n"
+          "7.Quit.\n";
+    }
+    void loadProgram(string fileN) {
+        ifstream file(fileN);
+        if (file.is_open()) {
+            while (!file.eof()) {
+                int instruction;
+                file >> hex >> instruction;
+                instructions.push_back(instruction);
+            }
+            file.close();
+        } else {
+            cout << "Unable to open file: " << fileN << endl;
+        }
+
+    }
+    void DisplayPC(int pc){
+    cout<<"the content of the PC is : "<<pc;
+    }
+    void DisplayRegisters(int r){
+        cout<<"the content of the Register is : "<<r;
+    }
+    void DisplayMemory(int memo){
+        cout<<"the content of the Memory is : "<<memo;
+    }
+    void DisplayScreen(){
+
+    }
+};
