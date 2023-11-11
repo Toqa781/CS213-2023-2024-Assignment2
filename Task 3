@@ -74,12 +74,18 @@ public:
         
         
         }else if (x[0]=='4'){
+
+
+        }else if (x[0]=='5'){
+
+
+        }else if (x[0]=='6'){
         
         
         }else if (x[0]=='B'){
         
         
-        }else if (x[0]=='c'){
+        }else if (x[0]=='C'){
         
         }
       }    
