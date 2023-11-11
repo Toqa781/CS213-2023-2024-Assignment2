@@ -1,5 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+class ProgramCounter {
+private:
+    int address;
+
+public:
+    ProgramCounter() : address(0) {}
+
+    void increment() {
+        address++;
+    }
+
+    void jump(int newAddress) {
+        address = newAddress;
+    }
+
+    int getAddress() {
+        return address;
+    }
+};
+
 class Memory{
 private:
     vector<int> memoryData;
@@ -24,47 +45,25 @@ public:
         memoryData[address]=data;
     }
 };
-class Register{
+class Register {
 private:
     int registerData;
 public:
-    int readRegister(){
+    int readRegister() {
         return registerData;
     }
-    void writeRegister(int data){
-        registerData=data;
+
+    void writeRegister(int data) {
+        registerData = data;
     }
 };
-class Machine{
-    vector<int> instructions;
+class Machine {
+    ProgramCounter PC;
     Memory memory;
     Register registers;
 public :
-    void menu(){
-        cout<<"1.Load Program.\n"
-              "2.Display the PC.\n"
-              "3.Display the IR.\n"
-              "4.Display the registers.\n"
-              "5.Display the memory.\n"
-              "6.Display the screen.\n"
-              "7.Quit.\n";
-    }
-    void loadProgram(string fileN) {
-        ifstream file(fileN);
-        if (file.is_open()) {
-            while (!file.eof()) {
-                int instruction;
-                file >> hex >> instruction;
-                instructions.push_back(instruction);
-            }
-            file.close();
-        } else {
-            cout << "Unable to open file: " << fileN << endl;
-        }
-
-    }
-    void DisplayPC(int pc){
-        cout<<"the content of the PC is : "<<pc;
+    void DisplayPC(){
+        cout<<"the content of the PC is : "<<PC.getAddress()<< endl;
     }
     void DisplayRegisters(){
         int data=registers.readRegister();
@@ -72,14 +71,12 @@ public :
     }
     void DisplayMemory(int address){
         int data=memory.readMemory(address);
-        cout<<"the content of the Memory is : "<<address;
+        cout<<"the content of the Memory is : "<<data << endl;
     }
-    void DisplayScreen(){
-
-    }
+    virtual void executeInstructions() = 0;
 };
 
-class ALU {
+class ALU : public Machine {
 private:
     vector<string> instructions;
 public:
@@ -100,7 +97,7 @@ public:
             instructions.push_back(newhexa.substr(i, 4));
         }
     }
-    void executeInstructions(){
+    void executeInstructions()  {
         for (int i = 0; i < instructions.size(); i++){
             string x=instructions[i];
             if (x[0]=='1'){
@@ -130,4 +127,6 @@ public:
         }
     }
 };
+
+
 
