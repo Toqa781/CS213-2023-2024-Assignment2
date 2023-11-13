@@ -169,9 +169,6 @@ public:
              //store the sum in register R
                registers.writeRegister(R, sum);
 
-            }else if (x[0]=='6'){
-
-
             }else if (x[0]=='B'){
 
 
