@@ -73,7 +73,7 @@ public :
         int data=memory.readMemory(address);
         cout<<"the content of the Memory is : "<<data << endl;
     }
-    virtual void executeInstructions() = 0;
+    virtual int executeInstructions() = 0;
 };
 
 class ALU : public Machine {
