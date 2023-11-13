@@ -158,8 +158,8 @@ public:
                 }
 
                 //Adding the data in registers S and T then storing the sum in register R
-                int datafromS = registers.readRegister(S);
-                int datafromT = registers.readRegister(T);
+                string datafromS = registers.readRegister(S);
+                string datafromT = registers.readRegister(T);
 
                 //converting data inside registers S and T from hexa to decimal
                 int dec1 = stoi(datafromS, nullptr, 16);
