@@ -78,6 +78,8 @@ public :
 
 class ALU : public Machine {
 private:
+    Memory memory;
+    Register registers;
     vector<string> instructions;
 public:
     void loadInstructions(string filename) {
