@@ -127,7 +127,7 @@ public:
                 }
                 //loading data from a specific memory address into a specific register
                 int address = dec_val;
-                int datafrommemory = memory.readMemory(address);
+                string datafrommemory = memory.readMemory(address);
                 registers.writeRegister(R, datafrommemory);
 
             } else if (x[0] == '2') {
@@ -158,18 +158,30 @@ public:
                 }
 
                 //Adding the data in registers S and T then storing the sum in register R
-                string datafromS = to_string( registers.readRegister(S) );
-                string datafromT = to_string( registers.readRegister(T) );
+                string datafromS =  registers.readRegister(S) ;
+                string datafromT =  registers.readRegister(T) ;
 
-                //converting data inside registers S and T from hexa to decimal
+                //converting data inside registers S and T from hex to decimal
                 int dec1 = stoi(datafromS, nullptr, 16);
                 int dec2 = stoi(datafromT, nullptr, 16);
 
                 // add the two numbers
                 int sum = dec1 + dec2;
 
+                //convert the sum from decimal to hex
+                string hex = "";
+                for (int i = 0; i < 2; i++) {
+                   int remainder = sum % 16;
+                   if (remainder <= 9) {
+                     hex = char(remainder + '0') + hex;
+                   } else {
+                     hex = char(remainder + 55)  + hex;
+                   }
+                   sum = sum / 16;
+                }
+
                 //store the sum in register R
-                registers.writeRegister(R, sum);
+                registers.writeRegister(R,hex);
 
             } else if (x[0] == 'B') {
 
@@ -179,7 +191,5 @@ public:
 
             }
         }
-    };
-
-
+    }
 };
