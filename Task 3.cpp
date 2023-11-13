@@ -47,14 +47,14 @@ public:
 };
 class Register {
 private:
-    int registerData;
+    vector<int> registerData;
 public:
-    int readRegister() {
-        return registerData;
+    int readRegister(int address) {
+        return registerData[address];
     }
 
-    void writeRegister(int data) {
-        registerData = data;
+    void writeRegister(int address,int data) {
+        registerData[address] = data;
     }
 };
 class Machine {
@@ -65,8 +65,8 @@ public :
     void DisplayPC(){
         cout<<"the content of the PC is : "<<PC.getAddress()<< endl;
     }
-    void DisplayRegisters(){
-        int data=registers.readRegister();
+    void DisplayRegisters(int address){
+        int data=registers.readRegister(address);
         cout<<"the content of the Register is : "<<data<<endl;
     }
     void DisplayMemory(int address){
@@ -99,36 +99,36 @@ public:
             instructions.push_back(newhexa.substr(i, 4));
         }
     }
-    
+
     int executeInstructions()  {
         for (int i = 0; i < instructions.size(); i++){
-           string x=instructions[i];
+            string x=instructions[i];
             int dec_val = 0;
             int R = 0;
             int S = 0;
             int T = 0;
             if(x[0]=='1'){
-            // converting the last two characters from hexadecimal to decimal
-               if (x[3] >= '0' && x[3] <= '9'){
-                   dec_val = x[3]-'0';
-               }else if (x[3] >= 'A' && x[3] <= 'F') {
-                   dec_val = (int(x[3]) - 55);
-               }
-               if (x[2] >= '0' && x[2] <= '9') {
-                 dec_val+= (x[2] - '0') * 16;
+                // converting the last two characters from hexadecimal to decimal
+                if (x[3] >= '0' && x[3] <= '9'){
+                    dec_val = x[3]-'0';
+                }else if (x[3] >= 'A' && x[3] <= 'F') {
+                    dec_val = (int(x[3]) - 55);
+                }
+                if (x[2] >= '0' && x[2] <= '9') {
+                    dec_val+= (x[2] - '0') * 16;
 
-               }else if (x[2] >= 'A' && x[2] <= 'F') {
-                  dec_val+= (int(x[2]) - 55) * 16;
-               }
-               if (x[1] >= '0' && x[1] <= '9'){
-                   R = x[1]-'0';
-               }else if (x[1] >= 'A' && x[1] <= 'F') {
-                   R = (int(x[1]) - 55);
-               }
-            //loading data from a specific memory address into a specific register
-               int address = dec_val;
-               int datafrommemory=memory.readMemory(address);
-               registers.writeRegister(R, datafrommemory);
+                }else if (x[2] >= 'A' && x[2] <= 'F') {
+                    dec_val+= (int(x[2]) - 55) * 16;
+                }
+                if (x[1] >= '0' && x[1] <= '9'){
+                    R = x[1]-'0';
+                }else if (x[1] >= 'A' && x[1] <= 'F') {
+                    R = (int(x[1]) - 55);
+                }
+                //loading data from a specific memory address into a specific register
+                int address = dec_val;
+                int datafrommemory=memory.readMemory(address);
+                registers.writeRegister(R, datafrommemory);
 
             }else if (x[0]=='2'){
 
@@ -139,37 +139,37 @@ public:
 
 
             }else if (x[0]=='5'){
-               // converting the last 3 characters from hexadecimal to decimal
+                // converting the last 3 characters from hexadecimal to decimal
                 if (x[1] >= '0' && x[1] <= '9'){
-                   R = x[1]-'0';
-               }else if (x[1] >= 'A' && x[1] <= 'F') {
-                   R = (int(x[1]) - 55);
-               }
-               if (x[2] >= '0' && x[2] <= '9') {
-                  S = (x[2] - '0');
+                    R = x[1]-'0';
+                }else if (x[1] >= 'A' && x[1] <= 'F') {
+                    R = (int(x[1]) - 55);
+                }
+                if (x[2] >= '0' && x[2] <= '9') {
+                    S = (x[2] - '0');
 
-               }else if (x[2] >= 'A' && x[2] <= 'F') {
-                  S = (int(x[2]) - 55);
-               }
-               if (x[3] >= '0' && x[3] <= '9'){
-                   T = x[3]-'0';
-               }else if (x[3] >= 'A' && x[3] <= 'F') {
-                   T = (int(x[3]) - 55);
-               }
+                }else if (x[2] >= 'A' && x[2] <= 'F') {
+                    S = (int(x[2]) - 55);
+                }
+                if (x[3] >= '0' && x[3] <= '9'){
+                    T = x[3]-'0';
+                }else if (x[3] >= 'A' && x[3] <= 'F') {
+                    T = (int(x[3]) - 55);
+                }
 
-            //Adding the data in registers S and T then storing the sum in register R
-               int datafromS= registers.readRegister(S);
-               int datafromT = registers.readRegister(T);
+                //Adding the data in registers S and T then storing the sum in register R
+                int datafromS= registers.readRegister(S);
+                int datafromT = registers.readRegister(T);
 
-            //converting data inside registers S and T from hexa to decimal
-               int dec1 = stoi(datafromS,nullptr,16);
-               int dec2 = stoi(datafromT,nullptr,16);
+                //converting data inside registers S and T from hexa to decimal
+                int dec1 = stoi(datafromS,nullptr,16);
+                int dec2 = stoi(datafromT,nullptr,16);
 
-            // add the two numbers
-               int sum = dec1 + dec2;
+                // add the two numbers
+                int sum = dec1 + dec2;
 
-             //store the sum in register R
-               registers.writeRegister(R, sum);
+                //store the sum in register R
+                registers.writeRegister(R, sum);
 
             }else if (x[0]=='B'){
 
@@ -180,6 +180,5 @@ public:
             }
         }
     };
-
 
 
