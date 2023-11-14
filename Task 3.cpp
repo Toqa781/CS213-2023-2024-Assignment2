@@ -149,6 +149,19 @@ public:
                 else
                     DisplayRegisters(registerAddresss);
             }else if (x[0] == '4') {
+                  if(x[2]>='0'&& x[2]<='9'){
+                        R=int(x[2]);
+                    }
+                    else if(x[2]>='A'&& x[2]<='F'){
+                        R=(int(x[2])-55);
+                    }
+                    if(x[3]>='0'&&x[3]<='9'){
+                        S=int(x[3]);
+                    }
+                    else if(x[3]>='A'&& x[3]<='F'){
+                        S=(int(x[3])-55);
+                    }
+                    registers.registerData[S]=registers.registerData[R];
                 PC.increment();
 
             } else if (x[0] == '5') {
