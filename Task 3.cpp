@@ -5,7 +5,9 @@ private:
     int address;
 
 public:
-    ProgramCounter() : address(0) {}
+    ProgramCounter() : address(0) {
+
+    }
 
     void increment() {
         address++;
@@ -97,13 +99,14 @@ public:
         }
     }
     void executeInstructions() {
-        for (int i = 0; i < instructions.size(); i++) {
-            string x = instructions[i];
+        while(PC.getAddress() < instructions.size()){
+            string x = instructions[PC.getAddress()];
             int dec_val = 0;
             int R = 0;
             int S = 0;
             int T = 0;
             if (x[0] == '1') {
+                PC.increment();
                 // converting the last two characters from hexadecimal to decimal
                 if (x[3] >= '0' && x[3] <= '9') {
                     dec_val = x[3] - '0';
@@ -127,27 +130,29 @@ public:
                 registers.writeRegister(R, datafrommemory);
 
             } else if (x[0] == '2') {
-
+                PC.increment();
+                string registerAddress = x.substr(1,1);
+                int registerAddresss = stoi(registerAddress,nullptr,16);
+                string Data = x.substr(2);
+                registers.writeRegister(registerAddresss,Data);
 
             } else if (x[0] == '3') {
-
-            } else if (x[0] == '4') {
-                    if(x[2]>='0'&& x[2]<='9'){
-                        R=int(x[2]);
-                    }
-                    else if(x[2]>='A'&& x[2]<='F'){
-                        R=(int(x[2])-55);
-                    }
-                    if(x[3]>='0'&&x[3]<='9'){
-                        S=int(x[3]);
-                    }
-                    else if(x[3]>='A'&& x[3]<='F'){
-                        S=(int(x[3])-55);
-                    }
-                    registers.registerData[S]=registers.registerData[R];
-                    registers.registerData[R].clear();
+                PC.increment();
+                string registerAddress = x.substr(1, 1);
+                string memoryAddress = x.substr(2);
+                int registerAddresss = stoi(registerAddress, nullptr, 16);
+                int memoAddress = stoi(memoryAddress, nullptr, 16);
+                string registerData = registers.readRegister(registerAddresss);
+                if(memoAddress != 00) {
+                    memory.writeMemory(memoAddress, registerData);
+                }
+                else
+                    DisplayRegisters(registerAddresss);
+            }else if (x[0] == '4') {
+                PC.increment();
 
             } else if (x[0] == '5') {
+                PC.increment();
                 // converting the last 3 characters from hexadecimal to decimal
                 if (x[1] >= '0' && x[1] <= '9') {
                     R = x[1] - '0';
@@ -193,10 +198,11 @@ public:
                 registers.writeRegister(R,hex);
 
             } else if (x[0] == 'B') {
-
+                PC.increment();
 
             } else if (x[0] == 'C') {
-                return;
+                PC.increment();
+                break;
 
             }
         }
