@@ -10,7 +10,7 @@ public:
     }
 
     void increment() {
-        address++;
+        address+=2;
     }
 
     void jump(int newAddress) {
