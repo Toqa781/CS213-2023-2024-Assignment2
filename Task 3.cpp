@@ -23,10 +23,9 @@ public:
 
 };
 
-class Memory{
-private:
-    vector<string>memoryData;
+class Memory {
 public:
+    vector<string> memoryData;
     void loadMemory(string filename) {
         ifstream file(filename);
         if (file.is_open()) {
@@ -50,15 +49,16 @@ public:
 
             }
             file.close();
-        }
-        else
-            cout<<"Unable to open file: "<<filename<<endl;
+        } else
+            cout << "Unable to open file: " << filename << endl;
     }
-    string readMemory(int address){
+
+    string readMemory(int address) {
         return memoryData[address];
     }
-    void writeMemory(int address,string data){
-        memoryData[address]=data;
+
+    void writeMemory(int address, string data) {
+        memoryData[address] = data;
     }
 
 };
@@ -115,7 +115,6 @@ public:
 
         while(PC.getAddress() < instructions.size()){
             string x = instructions[PC.getAddress()];
-            int R,S;
             if (x[0] == '1') {
                 PC.increment();
                 string M;
@@ -133,7 +132,7 @@ public:
 
             } else if (x[0] == '2') {
                 PC.increment();
-               string registerAddress = x.substr(1,1);
+                string registerAddress = x.substr(1,1);
                 int registerAddresss = stoi(registerAddress,nullptr,16);
                 string Data = x.substr(2,2);
                 registers.writeRegister(registerAddresss,Data);
@@ -151,22 +150,25 @@ public:
                 else
                     DisplayRegisters(registerAddresss);
             }else if (x[0] == '4') {
-                if(x[2]>='0'&& x[2]<='9'){
-                    R=int(x[2]);
+                int R, S;
+                if (x[2] >= '0' && x[2] <= '9') {
+                    R = (int(x[2]) - '0');
                 }
-                else if(x[2]>='A'&& x[2]<='F'){
-                    R=(int(x[2])-55);
+                else if (x[2] >= 'A' && x[2] <= 'F') {
+                    R = (int(x[2]) - 'A' + 10);
                 }
-                if(x[3]>='0'&&x[3]<='9'){
-                    S=int(x[3]);
-                }
-                else if(x[3]>='A'&& x[3]<='F'){
-                    S=(int(x[3])-55);
-                }
-                registers.registerData[S]=registers.registerData[R];
-                PC.increment();
 
-            } else if (x[0] == '5') {
+                if (x[3] >= '0' && x[3] <= '9') {
+                    S = (int(x[3]) - '0');
+                }
+                else if (x[3] >= 'A' && x[3] <= 'F') {
+                    S = (int(x[3]) - 'A' + 10);
+                }
+
+                registers.writeRegister(S, registers.readRegister(R));
+                PC.increment();
+            }
+            else if (x[0] == '5') {
                 PC.increment();
                 string R;
                 string S;
@@ -208,6 +210,13 @@ public:
                 registers.writeRegister(Raddresss,hex);
 
             } else if (x[0] == 'B') {
+                string R = x.substr(1, 1);
+                string XY = x.substr(2);
+                int Raddress = stoi(R, nullptr, 16);
+                int jumpAddress = stoi(XY, nullptr, 16);
+                if (registers.readRegister(Raddress) == registers.readRegister(0)) {
+                    PC.jump(jumpAddress);
+                }
                 PC.increment();
 
             } else if (x[0] == 'C') {
@@ -223,9 +232,10 @@ int main() {
     program.memory.loadMemory("Test.txt");
     program.loadInstructions("Test.txt");
     program.executeInstructions();
-    program.DisplayMemory(01);
     program.DisplayPC();
-    program.DisplayRegisters(00);
+    program.DisplayRegisters(0);
+    program.DisplayRegisters(1);
+    program.DisplayMemory(01);
 
     return 0;
 }
