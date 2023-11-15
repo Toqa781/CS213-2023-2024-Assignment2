@@ -27,14 +27,27 @@ class Memory{
 private:
     vector<string>memoryData;
 public:
-    void loadMemory(string filename){
+    void loadMemory(string filename) {
         ifstream file(filename);
-        if(file.is_open()){
-            string data;
-            while(!file.eof()){
-                file>>hex>>data;
-                memoryData.push_back(data.substr(0,2));
-                memoryData.push_back(data.substr(2,2));
+        if (file.is_open()) {
+            string line;
+            while (getline(file, line)) {
+                istringstream iss(line);
+                string hexValue;
+                string data = "";
+
+                while (iss >> hex >> hexValue) {
+                    // Remove "0x" from the hex value
+                    if (hexValue.substr(0, 2) == "0x") {
+                        hexValue = hexValue.substr(2);
+                    }
+
+                    // Concatenate the hex values without spaces
+                    data += hexValue;
+                }
+                memoryData.push_back(data.substr(0, 2));
+                memoryData.push_back(data.substr(2));
+
             }
             file.close();
         }
