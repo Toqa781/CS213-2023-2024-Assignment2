@@ -50,9 +50,8 @@ public:
 
 };
 class Register{
-private:
-    vector<string>registerData;
 public:
+    vector<string>registerData;
     string readRegister(int address){
         return registerData[address];
     }
@@ -103,16 +102,16 @@ public:
             string x = instructions[PC.getAddress()];
             if (x[0] == '1') {
                 PC.increment();
-                 string M;
-                 int Maddress;
-                 string R;
-                 int Raddress;
-            // converting the last three characters from hexadecimal to decimal
-                 M = x.substr(2);
+                string M;
+                int Maddress;
+                string R;
+                int Raddress;
+                // converting the last three characters from hexadecimal to decimal
+                M = x.substr(2);
                 Maddress = stoi(M,nullptr,16);
-                 R = x[1];
-                 Raddress = stoi(R,nullptr,16);
-            //loading data from a specific memory address into a specific register
+                R = x[1];
+                Raddress = stoi(R,nullptr,16);
+                //loading data from a specific memory address into a specific register
                 string datafrommemory = memory.readMemory(Maddress);
                 registers.writeRegister(Raddress, datafrommemory);
 
@@ -136,36 +135,37 @@ public:
                 else
                     DisplayRegisters(registerAddresss);
             }else if (x[0] == '4') {
-                  if(x[2]>='0'&& x[2]<='9'){
-                        R=int(x[2]);
-                    }
-                    else if(x[2]>='A'&& x[2]<='F'){
-                        R=(int(x[2])-55);
-                    }
-                    if(x[3]>='0'&&x[3]<='9'){
-                        S=int(x[3]);
-                    }
-                    else if(x[3]>='A'&& x[3]<='F'){
-                        S=(int(x[3])-55);
-                    }
-                    registers.registerData[S]=registers.registerData[R];
+                int R,S;
+                if(x[2]>='0'&& x[2]<='9'){
+                    R=int(x[2]);
+                }
+                else if(x[2]>='A'&& x[2]<='F'){
+                    R=(int(x[2])-55);
+                }
+                if(x[3]>='0'&&x[3]<='9'){
+                    S=int(x[3]);
+                }
+                else if(x[3]>='A'&& x[3]<='F'){
+                    S=(int(x[3])-55);
+                }
+                registers.registerData[S]=registers.registerData[R];
                 PC.increment();
 
             } else if (x[0] == '5') {
                 PC.increment();
-                 string R;
-                 string S;
-                 string T;
-                 int Raddresss;
-                 int Saddress;
-                 int Taddress;
-            // converting the last 3 characters from hexadecimal to decimal
-                  R =x[1];
-                  Raddresss = stoi(R,nullptr,16);
-                  S =x[2];
-                  Saddress = stoi(S,nullptr,16);
-                  T =x[3];
-                  Taddress = stoi(T,nullptr,16);
+                string R;
+                string S;
+                string T;
+                int Raddresss;
+                int Saddress;
+                int Taddress;
+                // converting the last 3 characters from hexadecimal to decimal
+                R =x[1];
+                Raddresss = stoi(R,nullptr,16);
+                S =x[2];
+                Saddress = stoi(S,nullptr,16);
+                T =x[3];
+                Taddress = stoi(T,nullptr,16);
 
                 //Adding the data in registers S and T then storing the sum in register R
                 string datafromS =  registers.readRegister(Saddress) ;
@@ -181,18 +181,25 @@ public:
                 //convert the sum from decimal to hex
                 string hex = "";
                 for (int i = 0; i < 2; i++) {
-                   int remainder = sum % 16;
-                   if (remainder <= 9) {
-                     hex = char(remainder + '0') + hex;
-                   } else {
-                     hex = char(remainder + 55)  + hex;
-                   }
-                   sum = sum / 16;
+                    int remainder = sum % 16;
+                    if (remainder <= 9) {
+                        hex = char(remainder + '0') + hex;
+                    } else {
+                        hex = char(remainder + 55)  + hex;
+                    }
+                    sum = sum / 16;
                 }
                 //store the sum in register R
                 registers.writeRegister(Raddresss,hex);
 
             } else if (x[0] == 'B') {
+                string R=x.substr(1,1);
+                string XY=x.substr(2);
+                int Raddress=stoi(R, nullptr,16);
+                int jumpAddress=stoi(XY, nullptr,16);
+                if(registers.readRegister(Raddress)==registers.readRegister(0)){
+                        PC.jump(jumpAddress);
+                }
                 PC.increment();
 
             } else if (x[0] == 'C') {
