@@ -112,10 +112,11 @@ public:
         }
     }
     void executeInstructions() {
-
-        while(PC.getAddress() < instructions.size()){
-            string x = instructions[PC.getAddress()];
+         int i=0;
+        while(i!=instructions.size()){
+            string x = instructions[i];
             if (x[0] == '1') {
+                i++;
                 PC.increment();
                 string M;
                 int Maddress;
@@ -131,6 +132,7 @@ public:
                 registers.writeRegister(Raddress, datafrommemory);
 
             } else if (x[0] == '2') {
+                i++;
                 PC.increment();
                 string registerAddress = x.substr(1,1);
                 int registerAddresss = stoi(registerAddress,nullptr,16);
@@ -138,6 +140,7 @@ public:
                 registers.writeRegister(registerAddresss,Data);
 
             } else if (x[0] == '3') {
+                i++;
                 PC.increment();
                 string registerAddress = x.substr(1, 1);
                 string memoryAddress = x.substr(2);
@@ -150,6 +153,7 @@ public:
                 else
                     DisplayRegisters(registerAddresss);
             }else if (x[0] == '4') {
+                i++;
                 int R, S;
                 if (x[2] >= '0' && x[2] <= '9') {
                     R = (int(x[2]) - '0');
@@ -169,6 +173,7 @@ public:
                 PC.increment();
             }
             else if (x[0] == '5') {
+                i++;
                 PC.increment();
                 string R;
                 string S;
@@ -210,6 +215,7 @@ public:
                 registers.writeRegister(Raddresss,hex);
 
             } else if (x[0] == 'B') {
+                i++;
                 string R = x.substr(1, 1);
                 string XY = x.substr(2);
                 int Raddress = stoi(R, nullptr, 16);
@@ -229,13 +235,19 @@ public:
 };
 int main() {
     ALU program;
-    program.memory.loadMemory("Test.txt");
-    program.loadInstructions("Test.txt");
+    program.memory.loadMemory("test.txt");
+    program.loadInstructions("test.txt");
     program.executeInstructions();
     program.DisplayPC();
+
     program.DisplayRegisters(0);
     program.DisplayRegisters(1);
-    program.DisplayMemory(01);
+    program.DisplayRegisters(2);
+
+
+
+
 
     return 0;
 }
+
